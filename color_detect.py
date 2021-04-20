@@ -3,6 +3,8 @@ import pandas as pd
 import cv2
 
 # Function which gets the R,G,B values and return the most matching color name
+# we will give values of R, G, B to the function i.e. value of red, green, blue color respectively to the function
+# inside the function we will try to find minimum absolute difference in the values given and values present in our dataframe ,so that we can have almost accurate color values from which we can get color name.
 def get_color_name(R, G, B):
     minimum = 1000
     for i in range(len(df)):
@@ -13,6 +15,8 @@ def get_color_name(R, G, B):
     return color_name
 
 # Function which gives coordinates of mouse when clicked(Left mouse button down)
+# when we click left button i.e. Left mouse button is pusshed down , this is a certen type of event in opencv known as EVENT_LBUTTONDOWN event.
+# In our function if the event matches with EVENT_LBUTTONDOWN event we will get the r,g,b values of color and x,y cordinates of cursor,we chenge all of them globally so it will be accessible globally in program
 def draw_function(event, x, y, flags, params):
     global clicked, r, g, b, xpos, ypos
     if event == cv2.EVENT_LBUTTONDOWN:
@@ -21,6 +25,8 @@ def draw_function(event, x, y, flags, params):
 
 
 # Path for image and csv file and reading the image
+### Path for image and csv file and reading the image
+# we will provide path for the input image and also for the csv file containing information about color then we will read the image and resize it such that we can see full image clearly.
 img_path = r"C:\Users\Admin\Desktop\TSF\TASKS\2\imgs\img1.jpg"
 csv_path = r"C:\Users\Admin\Desktop\TSF\TASKS\2\colors.csv"
 img = cv2.imread(img_path)
@@ -37,6 +43,7 @@ cv2.namedWindow("Image")
 cv2.setMouseCallback("Image", draw_function)
 clicked, r, g, b, xpos, ypos = False, 0, 0, 0, 0, 0
 
+# In this, if we have clicked on the image we will create rectangle of identified color and then create a text to display information about detected color, if color is dark we will write text in white and color is very light we will write text in black color. After user click on ESC button the execution of program will stop and we will end the program by clearing all windows.
 while True:
     cv2.imshow("Image", img)
     if clicked:
